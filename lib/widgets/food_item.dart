@@ -36,7 +36,7 @@ class FoodItem extends StatelessWidget {
             Text(
               '${foodItemModel.price}\$',
               style: const TextStyle(
-                  color: Colors.orange,
+                  color: Colors.deepOrange,
                   fontSize: 18,
                   fontWeight: FontWeight.w600),
             ),
