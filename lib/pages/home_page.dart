@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/models/food_item_model.dart';
+
+import '../widgets/food_item.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -6,7 +9,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color.fromARGB(255, 242, 242, 242),
       appBar: AppBar(
         title: const Text('Foodak'),
         centerTitle: true,
@@ -33,77 +36,16 @@ class HomePage extends StatelessWidget {
             ),
             const SizedBox(height: 32.0),
             Expanded(
-              child: GridView(
+              child: GridView.builder(
+                itemCount: food.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   mainAxisSpacing: 20,
                   crossAxisSpacing: 20,
                 ),
-                children: [
-                  Container(
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                    ),
-                    child: const Column(
-                      children: [
-                        Placeholder(
-                          fallbackHeight: 100,
-                        ),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        Text(
-                          'Burger',
-                          style: TextStyle(
-                              fontSize: 24, fontWeight: FontWeight.w600),
-                        ),
-                        Text('5\$'),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                    ),
-                    child: const Column(
-                      children: [
-                        Placeholder(
-                          fallbackHeight: 100,
-                        ),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        Text(
-                          'Burger',
-                          style: TextStyle(
-                              fontSize: 24, fontWeight: FontWeight.w600),
-                        ),
-                        Text('5\$'),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                    ),
-                    child: const Column(
-                      children: [
-                        Placeholder(
-                          fallbackHeight: 100,
-                        ),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        Text(
-                          'Burger',
-                          style: TextStyle(
-                              fontSize: 24, fontWeight: FontWeight.w600),
-                        ),
-                        Text('5\$'),
-                      ],
-                    ),
-                  ),
-                ],
+                itemBuilder: (context, index) => FoodItem(
+                  foodItemModel: food[index],
+                ),
               ),
             ),
           ],
