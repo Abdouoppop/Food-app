@@ -7,13 +7,15 @@ class FavoritesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    food = food.where((element) => element.isFavorite == true).toList();
+    List<FoodItemModel> favFood =
+        food.where((element) => element.isFavorite == true).toList();
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: ListView.builder(
-        itemCount: food.length,
+        itemCount: favFood.length,
         itemBuilder: (context, index) => FavoriteItem(
-          food: food[index],
+          favFood: favFood,
+          foodIndex: index,
         ),
       ),
     );

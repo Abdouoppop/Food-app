@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:food_app/models/food_item_model.dart';
 
 class FavoriteItem extends StatelessWidget {
-  const FavoriteItem({super.key, required this.food});
-  final FoodItemModel food;
+  const FavoriteItem(
+      {super.key, required this.foodIndex, required this.favFood});
+  final int foodIndex;
+  final List<FoodItemModel> favFood;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -12,7 +14,7 @@ class FavoriteItem extends StatelessWidget {
         child: Row(
           children: [
             Image.network(
-              food.imgUrl,
+              food[foodIndex].imgUrl,
               height: 70,
               fit: BoxFit.cover,
             ),
@@ -23,12 +25,12 @@ class FavoriteItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  food.name,
+                  food[foodIndex].name,
                   style: const TextStyle(
                       fontSize: 22, fontWeight: FontWeight.w600),
                 ),
                 Text(
-                  '${food.price}\$',
+                  '${food[foodIndex].price}\$',
                   style: const TextStyle(
                       color: Colors.deepOrange,
                       fontSize: 18,
@@ -37,10 +39,21 @@ class FavoriteItem extends StatelessWidget {
               ],
             ),
             const Spacer(),
-            const Icon(
-              Icons.favorite,
-              color: Colors.deepOrange,
-            ),
+            StatefulBuilder(builder: (context, setstat) {
+              return IconButton(
+                onPressed: () {
+                  setstat(() {
+                    favFood[foodIndex] = favFood[foodIndex].copyWith(
+                      isFavorite: false,
+                    );
+                  });
+                },
+                icon: Icon(favFood[foodIndex].isFavorite
+                    ? Icons.favorite
+                    : Icons.favorite_border),
+                color: Colors.deepOrange,
+              );
+            }),
           ],
         ),
       ),

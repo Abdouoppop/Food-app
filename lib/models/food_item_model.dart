@@ -8,6 +8,20 @@ class FoodItemModel {
   final String imgUrl;
   final double price;
   final bool isFavorite;
+
+  FoodItemModel copyWith({
+    String? name,
+    String? imgUrl,
+    double? price,
+    bool? isFavorite,
+  }) {
+    return FoodItemModel(
+      name: name ?? this.name,
+      imgUrl: imgUrl ?? this.imgUrl,
+      price: price ?? this.price,
+      isFavorite: isFavorite ?? this.isFavorite,
+    );
+  }
 }
 
 List<FoodItemModel> food = [

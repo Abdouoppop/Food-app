@@ -33,7 +33,7 @@ class HomePage extends StatelessWidget {
                 crossAxisSpacing: 20,
               ),
               itemBuilder: (context, index) => FoodItem(
-                foodItemModel: food[index],
+                foodIndex: index,
               ),
             ),
           ],
