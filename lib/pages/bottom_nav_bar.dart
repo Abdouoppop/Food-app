@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/pages/favorites_page.dart';
 import 'package:food_app/pages/home_page.dart';
 
 class BottomNavBarPage extends StatefulWidget {
@@ -19,7 +20,7 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
 
   List<Widget> pages = [
     const HomePage(),
-    const Center(child: Text('Favorite')),
+    const FavoritesPage(),
     const Center(child: Text('Account')),
   ];
   @override
