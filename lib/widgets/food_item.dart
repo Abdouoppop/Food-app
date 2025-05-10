@@ -35,7 +35,7 @@ class FoodItem extends StatelessWidget {
                         food[foodIndex].isFavorite
                             ? Icons.favorite
                             : Icons.favorite_border,
-                        color: Colors.deepOrange,
+                        color: Theme.of(context).primaryColor,
                       ),
                     ),
                   );
@@ -59,8 +59,8 @@ class FoodItem extends StatelessWidget {
             ),
             Text(
               '${food[foodIndex].price}\$',
-              style: const TextStyle(
-                  color: Colors.deepOrange,
+              style: TextStyle(
+                  color: Theme.of(context).primaryColor,
                   fontSize: 18,
                   fontWeight: FontWeight.w600),
             ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/pages/account_page.dart';
 import 'package:food_app/pages/favorites_page.dart';
 import 'package:food_app/pages/home_page.dart';
 
@@ -21,19 +22,19 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
   List<Widget> pages = [
     const HomePage(),
     const FavoritesPage(),
-    const Center(child: Text('Account')),
+    const AccountPage(),
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: pages[selectedIndex],
-      backgroundColor: const Color.fromARGB(255, 242, 242, 242),
+      // backgroundColor: const Color.fromARGB(255, 242, 242, 242),
       appBar: AppBar(
         title: const Text('Foodak'),
         centerTitle: true,
-        backgroundColor: const Color.fromARGB(255, 242, 242, 242),
-        foregroundColor: Colors.black,
-        elevation: 0,
+        // backgroundColor: const Color.fromARGB(255, 242, 242, 242),
+        // foregroundColor: Colors.black,
+        // elevation: 0,
       ),
       drawer: const Drawer(
         child: Center(
@@ -41,7 +42,6 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Colors.deepOrange,
         items: [
           const BottomNavigationBarItem(
             icon: Icon(Icons.home),

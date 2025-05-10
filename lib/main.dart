@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/core/theme.dart';
 import 'package:food_app/pages/bottom_nav_bar.dart';
 
 void main() {
@@ -10,8 +11,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: BottomNavBarPage(),
+    return MaterialApp(
+      theme: lightTheme,
+      home: const BottomNavBarPage(),
       debugShowCheckedModeBanner: false,
     );
   }
