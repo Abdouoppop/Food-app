@@ -8,6 +8,9 @@ class AccountPage extends StatelessWidget {
       required String title,
       String? subtitle,
       required IconData icon}) {
+    final size = MediaQuery.of(context).size;
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     return ListTile(
       title: Text(
         title,
@@ -18,7 +21,7 @@ class AccountPage extends StatelessWidget {
       leading: Icon(
         icon,
         color: Theme.of(context).primaryColor,
-        size: 30,
+        size: isLandscape ? size.height * 0.09 : size.height * 0.03,
       ),
       subtitle: subtitle != null
           ? Text(
@@ -31,6 +34,23 @@ class AccountPage extends StatelessWidget {
       trailing: Icon(
         Icons.chevron_right,
         color: Theme.of(context).primaryColor,
+        size: isLandscape ? size.height * 0.09 : size.height * 0.03,
+      ),
+    );
+  }
+
+  Widget personPhoto(double width, double height) {
+    return Container(
+      height: height,
+      width: width,
+      decoration: const BoxDecoration(
+        shape: BoxShape.circle,
+        image: DecorationImage(
+          image: AssetImage(
+            'assets/images/AI_abdou.png',
+          ),
+          fit: BoxFit.contain,
+        ),
       ),
     );
   }
@@ -61,37 +81,55 @@ class AccountPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    final Size size = MediaQuery.of(context).size;
+    final bool isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
+    final Widget nameText = Text(
+      'Abdou Ashraf',
+      style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+            fontWeight: FontWeight.w600,
+          ),
+    );
+    return SingleChildScrollView(
       child: Column(
         children: [
-          Container(
-            height: 250,
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              image: DecorationImage(
-                image: AssetImage(
-                  'assets/images/AI_abdou.png',
+          if (!isLandscape) ...[
+            personPhoto(size.width * 0.5, size.height * 0.25),
+            nameText,
+            const SizedBox(height: 16.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                orderVoucherItem(context: context, name: 'Orders', number: 50),
+                orderVoucherItem(
+                    context: context, name: 'Vouchers', number: 10),
+              ],
+            ),
+            const SizedBox(height: 24.0),
+          ],
+          if (isLandscape) ...[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Column(
+                  children: [
+                    personPhoto(size.width * 0.25, size.height * 0.5),
+                    const SizedBox(height: 8.0),
+                    nameText,
+                  ],
                 ),
-                fit: BoxFit.scaleDown,
-              ),
+                Column(
+                  children: [
+                    orderVoucherItem(
+                        context: context, name: 'Orders', number: 50),
+                    const SizedBox(height: 16.0),
+                    orderVoucherItem(
+                        context: context, name: 'Vouchers', number: 10),
+                  ],
+                ),
+              ],
             ),
-          ),
-          const SizedBox(height: 16.0),
-          const Text(
-            'Abdou Ashraf',
-            style: TextStyle(
-              fontSize: 32,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          const SizedBox(height: 16.0),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              orderVoucherItem(context: context, name: 'Orders', number: 50),
-              orderVoucherItem(context: context, name: 'Vouchers', number: 10),
-            ],
-          ),
+          ],
           const Divider(
             indent: 30,
             endIndent: 30,
