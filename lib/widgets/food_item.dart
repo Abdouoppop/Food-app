@@ -16,56 +16,66 @@ class FoodItem extends StatelessWidget {
       ),
       child: Padding(
         padding: const EdgeInsets.all(15.0),
-        child: Column(
-          children: [
-            Stack(
-              children: [
-                StatefulBuilder(builder: (context, setstat) {
-                  return Align(
-                    alignment: Alignment.topRight,
-                    child: IconButton(
-                      onPressed: () {
-                        setstat(() {
-                          food[foodIndex] = food[foodIndex].copyWith(
-                            isFavorite: !food[foodIndex].isFavorite,
-                          );
-                        });
-                      },
-                      icon: Icon(
-                        food[foodIndex].isFavorite
-                            ? Icons.favorite
-                            : Icons.favorite_border,
-                        color: Theme.of(context).primaryColor,
+        child: LayoutBuilder(builder: (context, constraints) {
+          return Column(
+            children: [
+              Stack(
+                children: [
+                  Align(
+                    alignment: Alignment.topCenter,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(15),
+                      child: Image.network(
+                        food[foodIndex].imgUrl,
+                        height: constraints.maxHeight * 0.5,
+                        fit: BoxFit.contain,
                       ),
                     ),
-                  );
-                }),
-              ],
-            ),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(15),
-              child: Image.network(
-                food[foodIndex].imgUrl,
-                height: 70,
-                fit: BoxFit.contain,
+                  ),
+                  StatefulBuilder(builder: (context, setstat) {
+                    return Align(
+                      alignment: Alignment.topRight,
+                      child: IconButton(
+                        onPressed: () {
+                          setstat(() {
+                            food[foodIndex] = food[foodIndex].copyWith(
+                              isFavorite: !food[foodIndex].isFavorite,
+                            );
+                          });
+                        },
+                        icon: Icon(
+                          food[foodIndex].isFavorite
+                              ? Icons.favorite
+                              : Icons.favorite_border,
+                          color: Theme.of(context).primaryColor,
+                          size: constraints.maxHeight * 0.17,
+                        ),
+                      ),
+                    );
+                  }),
+                ],
               ),
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-            Text(
-              food[foodIndex].name,
-              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
-            ),
-            Text(
-              '${food[foodIndex].price}\$',
-              style: TextStyle(
-                  color: Theme.of(context).primaryColor,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600),
-            ),
-          ],
-        ),
+              SizedBox(
+                height: constraints.maxHeight * 0.05,
+              ),
+              Text(
+                food[foodIndex].name,
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              Text(
+                '${food[foodIndex].price}\$',
+                style: TextStyle(
+                    color: Theme.of(context).primaryColor,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600),
+              ),
+            ],
+          );
+        }),
       ),
     );
   }

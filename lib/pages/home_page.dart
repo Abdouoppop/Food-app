@@ -8,7 +8,10 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Size screenSize = MediaQuery.of(context).size;
+    final Size size = MediaQuery.of(context).size;
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
+
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: SingleChildScrollView(
@@ -18,19 +21,19 @@ class HomePage extends StatelessWidget {
               borderRadius: BorderRadius.circular(24.0),
               child: Image.asset(
                 'assets/images/classic_burger.jpg',
-                height: screenSize.height * 0.23,
+                height: isLandscape ? size.height * 0.5 : size.height * 0.23,
                 fit: BoxFit.cover,
               ),
             ),
-            SizedBox(height: screenSize.height * 0.04),
+            SizedBox(height: size.height * 0.04),
             GridView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemCount: food.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 20,
-                crossAxisSpacing: 20,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: isLandscape ? 5 : 2,
+                mainAxisSpacing: size.height * 0.02,
+                crossAxisSpacing: size.height * 0.02,
               ),
               itemBuilder: (context, index) => FoodItem(
                 foodIndex: index,

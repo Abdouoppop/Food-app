@@ -27,7 +27,7 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: pages[selectedIndex],
+      body: SafeArea(child: pages[selectedIndex]),
       // backgroundColor: const Color.fromARGB(255, 242, 242, 242),
       appBar: AppBar(
         title: const Text('Foodak'),
